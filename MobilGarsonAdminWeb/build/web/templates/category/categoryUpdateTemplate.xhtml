@@ -1,0 +1,56 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <title>Facelet Title</title>
+    </h:head>
+    <h:body>
+        <ui:composition>
+            <h:form id="updateCat">
+
+                <p:panelGrid columns="2">
+
+                    <f:facet name="header">
+                        Kategori Güncelle
+                    </f:facet>
+
+                    <p:outputLabel for="cateList" value="Kategoriler"></p:outputLabel>
+
+                    <p:selectOneMenu id="cateList" value="#{categoryBean.categoryid}">
+
+                        <f:selectItem itemLabel="Güncellemek istediğiniz kategoriyi seçiniz" itemValue="0">
+                        </f:selectItem>
+
+                        <f:selectItems value="#{categoryBean.category}"
+                                       var="x" itemLabel="#{x.value}" 
+                                       itemValue="#{x.id}" >
+                        </f:selectItems>
+
+                    </p:selectOneMenu>
+
+                    <p:outputLabel for="newtext" value="Yeni Kategori İsmi"></p:outputLabel>
+
+                    <p:inputText id="newtext" styleClass="input-text" value="#{categoryBean.categoryNewName}"></p:inputText>
+
+                </p:panelGrid>
+
+                <h:commandButton 
+                    styleClass="CommandButton"  
+                    value="Güncelle">
+
+                    <f:ajax render=":growlform :categorydataform cellEditingTable :updateCat cateList categoryNewName" 
+                            execute="@form" 
+                            listener="#{categoryBean.updateCategory}">
+                    </f:ajax>
+
+                </h:commandButton>
+
+            </h:form>
+        </ui:composition>
+    </h:body>
+</html>
+

@@ -1,0 +1,63 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <title>Facelet Title</title>
+    </h:head>
+    <h:body>
+        <ui:composition>
+            <h:form id="addReservation">
+                <p:panelGrid columns="2">
+
+                    <f:facet name="header">
+                        Reservasyon Ekle
+                    </f:facet>
+
+                    <p:outputLabel for="user" value="(Kayıtlıysa) Kullanıcı No"/>
+                    <p:inputText id="user" value="#{reservationBean.userno}"/>
+
+                    <p:outputLabel for="name" value="İsim"/>
+                    <p:inputText id="name" value="#{reservationBean.name}"/>
+
+                    <p:outputLabel for="surname" value="Soyisim"/>
+                    <p:inputText id="surname" value="#{reservationBean.surname}"/>
+
+                    <p:outputLabel for="date" value="Tarih"/>
+                    <p:inputMask mask="99.99.9999" id="date" value="#{reservationBean.date}"/>
+
+                    <p:outputLabel for="clock" value="Saat"/>
+                    <p:inputMask mask="99:99" id="clock" value="#{reservationBean.clock}"/>
+
+                    <p:outputLabel value="Masa Listesi"/>
+                    <p:selectOneMenu id="resTableList" value="#{reservationBean.selectedTableid}">
+
+                        <f:selectItem itemLabel="Masa Seç" itemValue="0"/>
+                        <f:selectItems value="#{reservationBean.tableList}"
+                                       var="tbl"
+                                       itemLabel="#{tbl.name}"
+                                       itemValue="#{tbl.id}">
+                        </f:selectItems>
+
+                    </p:selectOneMenu>
+
+                </p:panelGrid>
+
+                <h:commandButton styleClass="CommandButton" 
+                                 value="Ekle"
+                                 >
+
+                    <f:ajax execute="@form"
+                            listener="#{reservationBean.createReservation}" 
+                            render=":growlform @form :confirmResFormh"/>
+
+                </h:commandButton>
+
+            </h:form>
+        </ui:composition>
+    </h:body>
+</html>
+

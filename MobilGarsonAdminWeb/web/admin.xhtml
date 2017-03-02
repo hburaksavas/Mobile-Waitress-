@@ -1,0 +1,417 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+    <h:head>
+        <title>Mobil Garson Admin Panel</title>
+        <link href="styles/ui.css" rel="stylesheet" type="text/css"/>
+        <link href="styles/admin.css" rel="stylesheet" type="text/css"/>
+        <link href="styles/admin-ui.css" rel="stylesheet" type="text/css"/>
+    </h:head>
+    <h:body>
+
+
+
+        <h:form id="growlform">
+
+            <p:growl id="growl" showDetail="true" life="2500" />  
+
+        </h:form> 
+
+        <div class="navbar">
+            <br/>
+
+            <h:form>
+
+                <div class="navbar-left">
+                    <h:graphicImage styleClass="icon"  value="resource/images/settings.png"/>
+                    <h:outputLabel styleClass="sitename">Mobil Garson Admin Paneli</h:outputLabel>
+                </div>
+
+                <div class="navbar-right">
+
+
+                    <div class="logout-panel">
+                        <div class="adminMail">
+                            <h:commandLink class="colorwhite logout" title="Şifre/Mail Güncelle"
+                                           value="#{adminLogin.mail}" onclick="showform('adminOperationDiv')">
+                                <f:ajax render=":adminForm"/>
+                            </h:commandLink>
+                        </div>
+                        <h:commandLink class="colorwhite logout" action="#{adminLogin.logout}" value="Logout"></h:commandLink>
+
+                    </div>
+
+                    <h:graphicImage styleClass="adminicon" value="resource/images/admin.png"/>
+
+
+
+                </div>
+
+
+            </h:form> 
+
+        </div> 
+
+
+
+        <div class="contextMenu">
+
+            <ui:insert name="content">
+                <ui:include src="templates/navigatorTemplate.xhtml"/>
+            </ui:insert>
+
+        </div> <!-- Navigator -->
+
+        <p:clock pattern="HH:mm:ss/dd.MM.yyyy" mode="server"/>
+        <div id="categoryData" style="display:none" class="dataTables">
+
+            <ui:insert name="content">
+                <ui:include src="templates/category/categoryDataTemplate.xhtml"/>
+            </ui:insert>
+
+        </div> 
+
+        <div class="generalForm" id="deleteCategory" style="display: none">
+            <ui:insert name="content">
+                <ui:include src="templates/category/categoryDeleteTemplate.xhtml"/>
+            </ui:insert>
+        </div> 
+
+        <div class="generalForm updateCategory" id="updateCategory" style="display: none">
+
+            <ui:insert name="content">
+                <ui:include src="templates/category/categoryUpdateTemplate.xhtml"/>
+            </ui:insert>
+
+        </div> 
+
+        <div class="generalForm addCategory" id="addCategory" style="display:none">
+            <ui:insert name="content">
+                <ui:include src="templates/category/categoryCreateTemplate.xhtml"/>
+            </ui:insert>
+        </div> 
+
+        <div id="productData" style="display:none" class="dataTables">
+            <ui:insert name="content">
+                <ui:include src="templates/product/productDataTemplate.xhtml"/>
+            </ui:insert>
+        </div> <!-- Product Data Table -->
+
+        <div class="generalForm" id="addProduct" style="display:none">
+            <ui:insert name="content">
+                <ui:include src="templates/product/productCreateTemplate.xhtml"/>
+            </ui:insert>
+        </div> <!-- Product Add Form -->
+
+        <div class="generalForm" id="updateProd" style="display: none">
+            <ui:insert name="content">
+                <ui:include src="templates/product/productUpdateTemplate.xhtml"/>
+            </ui:insert>
+        </div> <!-- Product Update Form -->
+
+        <div class="generalForm" id="deleteProduct" style="display: none">
+            <p:panelGrid columns="2">
+
+                <f:facet name="header">
+                    Ürün Sil
+                </f:facet>
+
+                <h:form id="deleteProductForm">                
+                    <p:panelGrid columns="1">
+                        <f:facet name="header">
+                            Kategoriler
+                        </f:facet>
+
+                        <p:selectOneMenu id="categoryList" value="#{productBean.selectedCategoryId}">
+
+                            <f:selectItem itemLabel="Kategori seçiniz" 
+                                          itemValue="0">
+
+                            </f:selectItem>
+
+                            <f:selectItems value="#{productBean.categoryList}" 
+                                           var="cx" 
+                                           itemLabel="#{cx.name}" itemValue="#{cx.id}">
+                            </f:selectItems>
+
+                            <f:ajax render=":delProductFormList proddList"
+                                    listener="#{productBean.pullProductsAjaxListener}">
+                            </f:ajax>
+
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                </h:form>
+                <h:form id="delProductFormList">
+
+                    <p:panelGrid columns="2">
+                        <f:facet name="header">
+                            Ürünler
+                        </f:facet>
+                        <p:selectOneMenu id="proddList" value="#{productBean.selectedProductId}">
+
+                            <f:selectItem itemLabel="Ürün seçiniz" itemValue="0">
+                            </f:selectItem>
+
+                            <f:selectItems value="#{productBean.productList}" var="p"
+                                           itemLabel="#{p.name}" itemValue="#{p.id}">
+                            </f:selectItems>
+
+                        </p:selectOneMenu>
+
+                        <h:commandButton styleClass="CommandButton" value="Sil">
+                            <f:ajax execute="@form"
+                                    listener="#{productBean.deleteProduct}"
+                                    render=":growlform @form proddList"/>
+                        </h:commandButton>
+                    </p:panelGrid>
+
+
+                </h:form>
+
+
+
+            </p:panelGrid>
+
+        </div> <!-- Product Delete Form -->
+
+        <div class="dataTables" id="tableDataDiv" style="display: none">
+            <ui:insert name="content">
+                <ui:include src="templates/dinnerTableDataTemplate.xhtml"/>
+            </ui:insert>
+
+        </div> <!-- DinnerTable Data Table -->
+
+        <div class="generalForm" id="addTable" style="display:none">
+            <h:form id="addTableForm">
+
+                <p:panelGrid columns="2">
+                    <f:facet name="header">
+                        Masa Ekle
+                    </f:facet>
+                    <p:outputLabel for="name" value="Masa ismi"/>
+                    <p:inputText styleClass="input-text" required="true" id="name" value="#{tableBean.tablename}"/>
+
+                    <p:outputLabel for="capx" value="Kapasite"/>
+                    <p:inputText styleClass="input-text" required="true" id="capx" value="#{tableBean.capacity}"/>
+                </p:panelGrid>
+
+                <h:commandButton value="Ekle" styleClass="CommandButton" >
+                    <f:ajax execute="@form" 
+                            listener="#{tableBean.addTable}" 
+                            render=":growlform @form :tableDataForm tableDataTables"/>
+                </h:commandButton>
+            </h:form>
+        </div> <!-- Dinner Table Add -->
+
+        <div class="generalForm" id="deleteTable" style="display: none">
+            <h:form id="deletetable">
+                <p:panelGrid columns="2">
+
+                    <f:facet name="header">
+                        Masa Sil
+                    </f:facet>
+
+
+                    <p:outputLabel for="tabid" value="Masa no:"/>
+
+                    <p:inputText styleClass="input-text" id="tabid" value="#{tableBean.tableid}" >
+                    </p:inputText>
+
+                </p:panelGrid>
+
+                <h:commandButton value="Sil" styleClass="CommandButton">
+                    <f:ajax execute="@form"  render=":growlform tabid" listener="#{tableBean.deleteTable}"/>
+                </h:commandButton> 
+
+            </h:form>
+
+        </div> <!-- Dinner Table Delete -->
+
+        <div class="generalForm" id="updateDinnerTable" style="display:none">
+            <h:form id="updateTableForm">
+                <p:panelGrid columns="2">
+                    <f:facet name="header">
+                        Masa Güncelle
+                    </f:facet>
+                    <p:outputLabel for="tableList" value="Güncellemek istedğiniz masayı seçiniz"/>
+                    <p:selectOneMenu id="tableList" value="#{tableBean.tableid}">
+                        <f:selectItem itemLabel="Masa Seçimi" itemValue="0"/>
+                        <f:selectItems value="#{tableBean.dinnerTableList}" var="tl"
+                                       itemLabel="#{tl.name}" itemValue="#{tl.id}"/>
+                    </p:selectOneMenu>
+
+                    <p:outputLabel for="tablename" value="Masa ismi"/>
+                    <p:inputText id="tablename" value="#{tableBean.tablename}" required="true"/>
+
+                    <p:outputLabel for="tablecapacity" value="Kapasite"/>
+                    <p:inputText id="tablecapacity" value="#{tableBean.capacity}" required="true"/>
+
+                </p:panelGrid>
+
+                <h:commandButton value="Güncelle" styleClass="CommandButton ">
+                    <f:ajax execute="@form" listener="#{tableBean.updateTable}" render=":growlform @form tableList tablename tablecapacity"/>
+                </h:commandButton>
+            </h:form>
+        </div> <!-- Dinner Table Update -->
+
+        <div class="dataTables" id="employeeDataDiv" style="display: none">
+
+            <ui:insert name="content">
+                <ui:include src="templates/employee/employeeDataTemplate.xhtml"/>
+            </ui:insert>
+
+        </div> <!-- Employee Data Table -->
+
+        <div class="generalForm" id="addEmployee" style="display: none">
+            <h:form id="addEmployeeForm">
+                <p:panelGrid columns="2">
+                    <f:facet name="header">
+                        Çalışan Ekleme Formu
+                    </f:facet>
+                    <p:panelGrid columns="2">
+                        <f:facet name="header">
+                            Çalışan Kimlik Bilgileri
+                        </f:facet>
+                        <p:outputLabel for="ename" value="İsim"/>
+                        <p:inputText required="true" id="ename" value="#{employeeBean.name}"/>
+
+                        <p:outputLabel for="esurname" value="Soyisim"/>
+                        <p:inputText required="true" id="esurname" value="#{employeeBean.surname}"/>
+
+                        <p:outputLabel for="email" value="Mail"/>
+                        <p:inputText required="true" id="email" value="#{employeeBean.mail}"/>
+
+                        <p:outputLabel for="tcno" value="Tc Numarası"/>
+                        <p:inputMask mask="99999999999" required="true" id="tcno" value="#{employeeBean.tcNo}"/>
+
+                        <p:outputLabel for="phone" value="Tel Numarası"/>
+                        <p:inputMask mask="0(999)999 9999" required="true" id="phone" value="#{employeeBean.phone}"/>
+
+                        <p:outputLabel for="password" value="Şifre"/>
+                        <p:inputText required="true" id="password" value="#{employeeBean.password}"/>
+                    </p:panelGrid>
+                    <p:panelGrid columns="2">
+                        <f:facet name="header">
+                            Adres Bilgileri
+                        </f:facet>
+                        <p:outputLabel for="city" value="Şehir"/>
+                        <p:inputText required="true" id="city" value="#{employeeBean.city}"/>
+
+                        <p:outputLabel for="district" value="İlçe"/>
+                        <p:inputText required="true" id="district" value="#{employeeBean.district}"/>
+
+                        <p:outputLabel for="street" value="Mahalle"/>
+                        <p:inputText required="true" id="street" value="#{employeeBean.street}"/>
+
+                        <p:outputLabel for="addresstext" value="Adres Tarifi"/>
+                        <p:inputText id="addresstext" value="#{employeeBean.addresstext}"/>
+                    </p:panelGrid>
+
+                </p:panelGrid>
+                <h:commandButton styleClass="CommandButton" value="Ekle">
+                    <f:ajax execute="@form"
+                            listener="#{employeeBean.createEmployee}" 
+                            render=":employeeDataForm employeeDataTable @form :growlform"/>
+                </h:commandButton>
+            </h:form>
+        </div> <!-- Employee Add -->
+
+        <div class="generalForm" id="updateEmployeeDiv" style="display: none">
+            <ui:insert name="content">
+                <ui:include src="templates/employee/updateEmployeeTemplate.xhtml"/>
+            </ui:insert>
+        </div> <!-- Employee Update -->
+
+        <div class="generalForm" id="deleteEmployeeDiv" style="display: none">
+            <ui:insert name="content">
+                <ui:include src="templates/employee/deleteEmployeeTemplate.xhtml"/>
+            </ui:insert>
+        </div> <!-- Employee Delete -->
+
+
+        <div class="dataTables" id="reservationData" style="display: none">
+            <ui:insert name="content">
+                <ui:include src="templates/reservation/reservationDataTemplate.xhtml"/>
+            </ui:insert>
+        </div> <!-- Reservation Data Table -->
+
+        <div class="generalForm" id="addReservationDiv" style="display: none">
+            <ui:insert name="content">
+                <ui:include src="templates/reservation/reservationCreateTemplate.xhtml"/>
+            </ui:insert>
+        </div> <!-- Reservation Add -->
+
+        <div class="generalForm" id="updateReservationDiv" style="display: none">
+
+            <ui:insert name="content">
+                <ui:include src="templates/reservation/reservationUpdateTemplate.xhtml"/>
+            </ui:insert>
+
+        </div> <!-- Reservation Update -->
+
+        <div class="generalForm" id="cancelReservationDiv" style="display: none">
+
+            <ui:insert name="content">
+                <ui:include src="templates/reservation/reservationCancelTemplate.xhtml"/>
+            </ui:insert>
+
+        </div> <!-- Reservation Delete -->
+
+
+        <div class="generalForm" id="restaurantInfoDiv" style="display: none">
+
+            <ui:insert name="content">
+                <ui:include src="templates/restaurant/restaurantInfoTemplate.xhtml"/>
+            </ui:insert>
+
+        </div><!-- Restaurant Info  -->
+
+        <div class="generalForm" id="restaurantUpdateInfoDiv" style="display: none">
+            <ui:insert name="content">
+                <ui:include src="templates/restaurant/restaurantUpdateTemplate.xhtml"/>
+            </ui:insert>
+        </div><!-- Restaurant Infos Update -->
+
+        <div class="generalForm" id="restaurantUpdateImageDiv" style="display: none">
+            <ui:insert name="content">
+                <ui:include src="templates/restaurant/restaurantImageTemplate.xhtml"/>
+            </ui:insert>
+        </div><!-- Restaurant Image Update/Create -->
+
+        <div class="comments" id="restaurantCommentDiv" style="display: none">
+            <ui:insert name="content">
+                <ui:include src="templates/restaurant/restaurantCommentTemplate.xhtml"/>
+            </ui:insert>
+        </div> <!-- Restaurant Comments -->
+
+        <div class="comments" id="restaurantComplaintDiv" style="display: none">
+            <ui:insert name="content">
+                <ui:include src="templates/restaurant/restaurantComplaintTemplate.xhtml"/>
+            </ui:insert>
+        </div>
+
+        <div class="dataTables" id="zreportDataDiv" style="display: none">
+            <ui:insert name="content">
+                <ui:include src="templates/zreport/zreportDataTemplate.xhtml"/>
+            </ui:insert>
+        </div>
+
+        <div class="generalForm" id="zreportCreateDiv" style="display: none">
+            <ui:insert name="content">
+                <ui:include src="templates/zreport/zreportCreateTemplate.xhtml"/>
+            </ui:insert>
+        </div>
+
+        <div class="generalForm" id='adminOperationDiv' style="display: none">
+            <ui:insert name="content">
+                <ui:include src="templates/adminOperationTemplate.xhtml"/>
+            </ui:insert>
+        </div>
+        <script src="resource/js/ui.js" type="text/javascript"></script>
+    </h:body>
+</html>
+

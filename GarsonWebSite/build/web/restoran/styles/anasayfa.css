@@ -1,0 +1,122 @@
+*{
+    padding:0;
+    margin:0;
+    border:0;
+}
+.navbar{
+    float:left;
+    width: 100%;
+    background:linear-gradient(90deg, #008bad, #00cdff);
+    box-shadow: inset 1px 1px 10px #008bad;
+    color:white;
+    font-size: 28px;    
+    line-height: 3em;
+    text-indent: 50px;
+
+}
+
+.leftForm
+{
+    float:left;
+    width: 30%;
+    margin-left: 20%;
+    min-height: 500px;
+    height: 50%;
+    margin-top: 100px;
+    background:linear-gradient(90deg, #71d989, #3ad55e);
+    color:#3ad55e;
+    box-shadow:1px 1px 10px #008bad;
+
+}
+
+.rightForm{
+    float:left;
+    width: 30%;
+    margin-left: 5%;
+    min-height: 500px;
+    height: 50%;
+    margin-top: 100px;
+    background:linear-gradient(90deg, #d8c376, #d9b328);
+    color: #d9b328;
+    box-shadow:1px 1px 10px #008bad;
+}
+.header-form{
+    float:left;
+    width: 100%;
+    text-align: center;
+    font-size:19px;
+    font-weight: bolder;
+    line-height: 2em;
+    background:linear-gradient(-180deg, #434343, #616161);
+}
+.lbl{
+    float:left;
+    color:white;
+    width: 45%;
+    font-size:20px;
+    margin-left:2%;
+    margin-top: 4%;
+    text-indent: 10px;
+}
+.input-txt{
+    float:left;
+    margin-left:2%;
+    margin-top: 1.5%;
+    width: 95%;
+    height: 26px;
+    border-radius: 8px;
+    text-indent: 5px;
+    background:linear-gradient(-270deg, #f1f1f1, #ededed);
+    box-shadow:1px 1px 10px #d6eeca;
+}
+.file-up{
+    float:left;
+    margin-left:2%;
+    margin-top: 3.5%;
+}
+.command-buton{
+    font-size: 20px;
+    border-radius: 8px;
+    padding: 0.5em;
+    float:right;
+    cursor: pointer;
+    opacity: 0.9;
+    margin-right: 25px;
+    margin-top: 25px;
+    background-color: inherit;
+    box-shadow:1px 1px 10px #d6eeca;
+}
+.command-buton:hover{
+    background-color: yellowgreen;
+    color: white;
+    opacity: 1;
+}
+.command-link{
+    float:left;
+    margin-left: 30px;
+    margin-top:40px;
+}
+
+.footer{
+    position: absolute;
+    width: 100%;
+    top:92%;
+    height: 8%;
+    background:linear-gradient(-90deg, #008bad, #00cdff);
+    box-shadow: inset 1px 1px 10px #008bad;
+}
+.linking{
+    float:left;
+    width: 150px;
+    line-height: 3em;
+    margin-top: 5px;
+    margin-left: 15px;
+    text-decoration: none;
+    color:white;
+    font-size:17px;
+    font-weight: bold;
+}
+.linking:hover{
+    color:orange;
+    transform: scale(1.05);
+}

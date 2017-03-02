@@ -1,0 +1,191 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Facelet Title</title>
+    </h:head>
+    <h:body>
+        <ui:composition>
+               <h:form id="employeeDataForm">
+                <p:dataTable id="employeeDataTable"
+                             var="edt" 
+                             value="#{employeeBean.employeeList}"  
+                             paginator="true" 
+                             rows="10" 
+                             paginatorPosition="bottom"  
+                             filteredValue="#{employeeBean.filteredEmployeeList}"  
+                             editable="false" rendered="true">  
+                    <f:facet name="header">          Çalışanlar        </f:facet>  
+
+                    <p:column filterBy="#{edt.id}">  
+
+                        <f:facet name="header"> 
+                            <h:outputText value="Çalışan No"/>  
+                        </f:facet>  
+
+                        <p:cellEditor>  
+
+                            <f:facet name="output">  
+                                <h:outputText value="#{edt.id}"/>  
+                            </f:facet>  
+
+                            <f:facet name="input">  
+                                <p:inputText id="modelInput" value="#{edt.id}" style="width:96%"/>  
+                            </f:facet>  
+
+                        </p:cellEditor>  
+
+                    </p:column>  
+
+                    <p:column filterBy="#{edt.name}">  
+
+                        <f:facet name="header">  
+                            <h:outputText value="İsim"/>  
+                        </f:facet>  
+
+                        <p:cellEditor>  
+
+                            <f:facet name="output">  
+                                <h:outputText value="#{edt.name}"/>  
+                            </f:facet>  
+
+                            <f:facet name="input">  
+                                <p:inputText value="#{edt.name}" style="width:96%"/>  
+                            </f:facet>  
+
+                        </p:cellEditor>  
+
+                    </p:column>  
+                    <p:column filterBy="#{edt.surname}">  
+
+                        <f:facet name="header">  
+                            <h:outputText value="Soyisim"/>  
+                        </f:facet>  
+
+                        <p:cellEditor>  
+
+                            <f:facet name="output">  
+                                <h:outputText value="#{edt.surname}"/>  
+                            </f:facet>  
+
+                            <f:facet name="input">  
+                                <p:inputText value="#{edt.surname}" style="width:96%"/>  
+                            </f:facet>  
+
+                        </p:cellEditor>  
+
+                    </p:column>  
+
+                    <p:column filterBy="#{edt.mail}">  
+
+                        <f:facet name="header">  
+                            <h:outputText value="Mail"/>  
+                        </f:facet>  
+
+                        <p:cellEditor>  
+
+                            <f:facet name="output">  
+                                <h:outputText value="#{edt.mail}"/>  
+                            </f:facet>  
+
+                            <f:facet name="input">  
+                                <p:inputText value="#{edt.mail}" style="width:96%"/>  
+                            </f:facet>  
+
+                        </p:cellEditor>  
+
+                    </p:column>  
+
+                    <p:column filterBy="#{edt.phone}">  
+
+                        <f:facet name="header">  
+                            <h:outputText value="Tel"/>  
+                        </f:facet>  
+
+                        <p:cellEditor>  
+
+                            <f:facet name="output">  
+                                <h:outputText value="#{edt.phone}"/>  
+                            </f:facet>  
+
+                            <f:facet name="input">  
+                                <p:inputText value="#{edt.phone}" style="width:96%"/>  
+                            </f:facet>  
+
+                        </p:cellEditor>  
+
+                    </p:column>  
+
+                    <p:column filterBy="#{edt.tcNo}">  
+
+                        <f:facet name="header">  
+                            <h:outputText value="Tc No"/>  
+                        </f:facet>  
+
+                        <p:cellEditor>  
+
+                            <f:facet name="output">  
+                                <h:outputText value="#{edt.tcNo}"/>  
+                            </f:facet>  
+
+                            <f:facet name="input">  
+                                <p:inputText value="#{edt.tcNo}" style="width:96%"/>  
+                            </f:facet>  
+
+                        </p:cellEditor>  
+
+                    </p:column>  
+
+                    <p:column filterBy="#{edt.password}">  
+
+                        <f:facet name="header">  
+                            <h:outputText value="Şifre"/>  
+                        </f:facet>  
+
+                        <p:cellEditor>  
+
+                            <f:facet name="output">  
+                                <h:outputText value="#{edt.password}"/>  
+                            </f:facet>  
+
+                            <f:facet name="input">  
+                                <p:inputText value="#{edt.password}" style="width:96%"/>  
+                            </f:facet>  
+
+                        </p:cellEditor>  
+
+                    </p:column>  
+
+                    <p:column filterBy="#{edt.adressid}">  
+
+                        <f:facet name="header">  
+                            <h:outputText value="Adres No"/>  
+                        </f:facet>  
+
+                        <p:cellEditor>  
+
+                            <f:facet name="output">  
+                                <h:outputText value="#{edt.adressid}"/>  
+                            </f:facet>  
+
+                            <f:facet name="input">  
+                                <p:inputText value="#{edt.adressid}" style="width:96%"/>  
+                            </f:facet>  
+
+                        </p:cellEditor>  
+
+                    </p:column>  
+
+
+
+                </p:dataTable>
+
+            </h:form>
+        </ui:composition>
+    </h:body>
+</html>
+

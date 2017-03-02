@@ -1,0 +1,58 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Facelet Title</title>
+        <link href="styles/login.css" rel="stylesheet" type="text/css"/>
+    </h:head>
+    <h:body>
+        <p:panel class="loginForm">
+            <f:facet name="header">
+                Giriş Yap
+            </f:facet>
+
+            <h:form>
+
+                <p:panelGrid columns="2" styleClass="login-panel"
+                             columnClasses="col1,col2"> 
+
+
+                    <h:outputLabel value="Restoran Seç"/>
+                    <p:selectOneMenu value="#{homeLogin.restaurantid}">
+                        <f:selectItems value="#{homeLogin.restaurants}"
+                                       var="res"
+                                       itemLabel="#{res.name}"
+                                       itemValue="#{res.id}"/>
+                    </p:selectOneMenu>
+
+                    <h:outputLabel value="Mail"/>
+                    <p:inputText value="#{homeLogin.mail}" 
+                                 required="true"
+                                 requiredMessage="Mail giriniz"/>
+
+                    <h:outputLabel value="Şifre"/>
+                    <p:password value="#{homeLogin.password}"
+                                 required="true"
+                                 requiredMessage="Şifre giriniz"/>
+
+                </p:panelGrid>
+
+                <p:commandButton action="#{homeLogin.login}" 
+                                 update=":growlform:growl" styleClass="login-command"
+                                 value="Giriş"
+                                 icon="ui-icon-check" />
+
+            </h:form>
+
+        </p:panel>
+
+        <h:form id="growlform">
+            <p:growl id="growl" showDetail="true" life="2500" />  
+        </h:form> 
+
+    </h:body>
+</html>
+

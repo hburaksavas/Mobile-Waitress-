@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Dec 7, 2016 1:03:25 AM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="com.garson.model.entity.Bill" table="bill" catalog="dodge" optimistic-lock="version">
+        <id name="id" type="java.lang.Long">
+            <column name="id" />
+            <generator class="identity" />
+        </id>
+        <property name="restaurantid" type="java.lang.Long">
+            <column name="restaurantid" />
+        </property>
+        <property name="date" type="string">
+            <column name="date" length="50" />
+        </property>
+        <property name="clock" type="string">
+            <column name="clock" length="5" />
+        </property>
+        <property name="amount" type="java.lang.Double">
+            <column name="amount" precision="22" scale="0" />
+        </property>
+        <property name="orders" type="string">
+            <column name="orders" />
+        </property>
+    </class>
+</hibernate-mapping>

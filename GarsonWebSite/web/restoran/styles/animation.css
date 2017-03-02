@@ -1,0 +1,49 @@
+.animate-bill{
+    -webkit-animation: animationShadow 1.2s linear infinite;
+    animation: animationShadow 1.2s linear infinite;
+}
+@keyframes animationShadow { 
+    0%{ opacity : 0.1;}
+    25% {opacity :0.25;}
+    50%{ opacity : 0.50;}
+    75%{ opacity : 0.75;}
+    100%{ opacity : 1;}
+}
+@-webkit-keyframes animationShadow { 
+    0%{ opacity : 0.1;}
+    25% {opacity :0.25;}
+    50%{ opacity : 0.50;}
+    75%{ opacity : 0.75;}
+    100%{ opacity : 1;}
+}
+
+.animate:hover{
+    animation-play-state: paused;
+}
+
+
+
+.animate-waitress{
+    display: block;
+    border-radius: 6px;
+    -webkit-animation: animationBox 1s linear infinite;
+    animation: animationBox 1s linear infinite;
+}
+@keyframes animationBox { 
+    0%{border-left:1px solid #e96156;}
+    25%{border-top:1px solid #e96156}
+    50%{border-right:1px solid #e96156;}
+    100%{border-bottom:1px solid #e96156;}
+
+
+}
+@-webkit-keyframes animationBox { 
+    0%{border-left:1px solid #e96156;}
+    25%{border-top:1px solid #e96156}
+    50%{border-right:1px solid #e96156;}
+    100%{border-bottom:1px solid #e96156;}
+}
+
+.animate-waitress:hover{
+    animation-play-state: paused;
+}

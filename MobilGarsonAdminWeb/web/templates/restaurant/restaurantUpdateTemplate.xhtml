@@ -1,0 +1,40 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Facelet Title</title>
+    </h:head>
+    <h:body>
+        <ui:composition>
+
+            <h:form id="restaurantUpdateForm">
+                <p:panelGrid columns="2">
+                    <f:facet name="header">
+                        Restaurant Bilgilerini Güncelle
+                    </f:facet>
+
+
+                    <p:outputLabel value="Restaurant Adı"/>
+                    <p:inputText styleClass="input-text" value="#{restaurantBean.restaurantName}"/>
+
+                    <p:outputLabel value="Restaurant Açıklaması"/>
+                    <p:inputTextarea styleClass="input-text" value="#{restaurantBean.restaurantDefinition}"/>
+
+                </p:panelGrid>
+
+                <h:commandButton styleClass="CommandButton" value="Güncelle">
+                    <f:ajax listener="#{restaurantBean.updateRestaurantInfos}"
+                            execute="@form"
+                            render="@form"/>
+                </h:commandButton>
+
+            </h:form>
+
+        </ui:composition>
+    </h:body>
+</html>
+

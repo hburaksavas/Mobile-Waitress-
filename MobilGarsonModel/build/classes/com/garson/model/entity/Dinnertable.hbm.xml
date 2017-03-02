@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Dec 7, 2016 1:03:25 AM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+  <class catalog="dodge" name="com.garson.model.entity.DinnerTable" optimistic-lock="version" table="dinnertable">
+    <id name="id" type="java.lang.Long">
+      <column name="id"/>
+      <generator class="identity"/>
+    </id>
+    <property name="restaurantid" type="java.lang.Long">
+      <column name="restaurantid"/>
+    </property>
+    <property name="statu" type="java.lang.Integer">
+      <column name="statu"/>
+    </property>
+    <property name="capacity" type="java.lang.Integer">
+      <column name="capacity"/>
+    </property>
+    <property name="name" type="string">
+      <column length="55" name="name"/>
+    </property>
+  </class>
+</hibernate-mapping>

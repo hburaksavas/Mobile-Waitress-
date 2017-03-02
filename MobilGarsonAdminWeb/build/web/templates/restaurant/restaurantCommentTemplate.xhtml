@@ -1,0 +1,48 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Facelet Title</title>
+    </h:head>
+    <h:body>
+        <ui:composition>
+            
+            <h:form id="restaurantCommentForm">
+
+                <p:dataScroller value="#{restaurantBean.commentList}" var="com" chunkSize="5"  styleClass="comments">
+
+                    <f:facet name="header">
+                        Hakkınızda Yapılan Yorumlar
+                    </f:facet>
+                    <f:facet name="loader">
+                        <p:commandButton type="button" value="Daha Fazla" icon="ui-icon-load"></p:commandButton>
+                    </f:facet>
+
+                    <h:panelGrid columns="2" style="width:100%">
+                        <p:outputPanel>
+                            <h:panelGrid columns="2" cellpadding="4">
+                               
+                                <h:panelGrid columns="1">
+                                    <h:outputText value="#{com.date}" style="font-size: 12px"/>
+                                    <h:outputText value="#{com.clock}" style="font-size: 12px"/>
+                                </h:panelGrid>
+                                
+                                <h:panelGrid columns="1">
+                                    <h:outputText value="#{com.comment}" style="font-weight: bold"/>
+                                </h:panelGrid>
+
+                            </h:panelGrid>
+                            <p:separator/>
+                        </p:outputPanel>
+                    </h:panelGrid>
+                </p:dataScroller>
+
+            </h:form>
+        </ui:composition>
+    </h:body>
+</html>
+

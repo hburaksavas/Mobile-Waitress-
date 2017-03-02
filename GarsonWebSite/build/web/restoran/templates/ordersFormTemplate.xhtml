@@ -1,0 +1,55 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Facelet Title</title>
+    </h:head>
+    <h:body>
+        <ui:composition>
+
+            <h:form id="ordersForm">
+
+                <div class="left-widget">
+
+                    <h:outputLabel styleClass="header" value="Bekleyen Siparişler" />
+
+                    <div class="widget-contents">
+                        <c:forEach items="#{homeBean.orderItemList}" var="item"> 
+                            <div class="order-item">
+                                <p:panelGrid columns="2" style="width: 100%">
+                                    <f:facet name="header">
+                                        <h:outputLabel value="Sipariş No #{item.orderNo}"/>
+                                    </f:facet>
+                                    <h:outputLabel value="Ürün"/>
+                                    <h:outputLabel value="#{item.productName}"/>
+                                    <h:outputLabel value="Adet"/>
+                                    <h:outputLabel value="#{item.orderCount}"/>
+                                    <h:outputLabel value="Masa"/>
+                                    <h:outputLabel value="#{item.tableName}"/>
+                                    <h:outputLabel value="Saat"/>
+                                    <h:outputLabel value="#{item.clock}"/>
+                                </p:panelGrid>
+
+                                <p:commandButton value="Hazır" 
+                                                 styleClass="ready-buton"
+                                                 action="#{homeBean.remove_OrderItem_If_Its_Ready(item.orderNo)}"
+                                                 update=":ordersForm">
+                                </p:commandButton>
+                            </div>
+                        </c:forEach>
+
+                    </div>
+                </div>
+
+            </h:form>
+
+
+        </ui:composition>
+    </h:body>
+</html>
+

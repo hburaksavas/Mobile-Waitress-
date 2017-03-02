@@ -1,0 +1,176 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Facelet Title</title>
+    </h:head>
+    <h:body>
+        <ui:composition>
+
+            <p:panelGrid columns="1">
+                <h:form id="productform">
+                    <p:panelGrid columns="2">
+                       
+                        <p:outputLabel for="cattList" value="Kategoriler"></p:outputLabel>
+                       
+                        <p:selectOneMenu id="cattList" value="#{productBean.selectedCategoryId}" >
+
+                            <f:selectItem itemLabel="Kategori seçiniz" itemValue="0">
+                            </f:selectItem>
+
+                            <f:selectItems value="#{productBean.categoryList}"
+                                           var="x" itemLabel="#{x.name}" 
+                                           itemValue="#{x.id}" >
+                            </f:selectItems>
+                            <f:ajax render=":productdataform" 
+                                    listener="#{productBean.pullProductsAjaxListener}">
+                            </f:ajax>
+
+                        </p:selectOneMenu>  
+                        
+                    </p:panelGrid>
+                </h:form>
+
+                <h:form id="productdataform">
+                    <p:dataTable id="productTable"
+                                 var="pr" 
+                                 value="#{productBean.productList}"  
+                                 paginator="true" 
+                                 rows="10" 
+                                 paginatorPosition="bottom"  
+                                 filteredValue="#{productBean.filteredProductList}"  
+                                 editable="false" 
+                                 rendered="true"
+                                 widgetVar="proTable"
+                                 >  
+
+                        <f:facet name="header">          Ürünler        </f:facet>  
+
+                        <p:column filterBy="#{pr.id}" footerText="Numara" >  
+
+                            <f:facet name="header"> 
+                                <h:outputText value="Ürün No"/>  
+                            </f:facet>  
+
+                            <p:cellEditor>  
+
+                                <f:facet name="output">  
+                                    <h:outputText value="#{pr.id}"/>  
+                                </f:facet>  
+
+                                <f:facet name="input">  
+                                    <p:inputText id="modelInput" value="#{pr.id}" style="width:96%" onkeyup="proTable.filter()"/>  
+                                </f:facet>  
+
+                            </p:cellEditor>  
+
+                        </p:column>  
+
+                        <p:column filterBy="#{pr.name}" footerText="İsim" >  
+
+                            <f:facet name="header">  
+                                <h:outputText value="Ürün İsmi"/>  
+                            </f:facet>  
+
+                            <p:cellEditor>  
+
+                                <f:facet name="output">  
+                                    <h:outputText value="#{pr.name}"/>  
+                                </f:facet>  
+
+                                <f:facet name="input">  
+                                    <p:inputText value="#{pr.name}" style="width:96%"/>  
+                                </f:facet>  
+
+                            </p:cellEditor>  
+
+                        </p:column>  
+
+                        <p:column filterBy="#{pr.price}" footerText="Fiyat" >  
+
+                            <f:facet name="header">  
+                                <h:outputText value="Ürün Fiyatı"/>  
+                            </f:facet>  
+
+                            <p:cellEditor>  
+
+                                <f:facet name="output">  
+                                    <h:outputText value="#{pr.price}">
+                                        <f:convertNumber currencySymbol="tl" type="currency"/>
+                                    </h:outputText>  
+                                </f:facet>  
+
+                                <f:facet name="input">  
+                                    <p:inputText value="#{pr.price}" style="width:96%"/>  
+                                </f:facet>  
+
+                            </p:cellEditor>  
+
+                        </p:column>  
+
+                        <p:column filterBy="#{pr.score}" footerText="Puan" >  
+
+                            <f:facet name="header">  
+                                <h:outputText value="Ürün Puanı"/>  
+                            </f:facet>  
+
+                            <p:cellEditor>  
+
+                                <f:facet name="output">  
+                                    <h:outputText value="#{pr.score}">
+                                        <f:convertNumber pattern="#00.000"></f:convertNumber>
+                                    </h:outputText>  
+                                </f:facet>  
+
+                                <f:facet name="input">  
+                                    <p:inputText value="#{pr.score}" style="width:96%"/>  
+                                </f:facet>  
+
+                            </p:cellEditor>  
+
+                        </p:column>   
+
+                        <p:column filterBy="#{pr.stock}" footerText="Stok" >  
+                            <f:facet name="header">  
+                                <h:outputText value="Ürün Stok"/>  
+                            </f:facet>  
+                            <p:cellEditor>  
+                                <f:facet name="output">  
+                                    <h:outputText value="#{pr.stock}"/>  
+                                </f:facet>  
+                                <f:facet name="input">  
+                                    <p:inputText value="#{pr.stock}" style="width:96%"/>  
+                                </f:facet>  
+                            </p:cellEditor>  
+
+                        </p:column>  
+
+                        <p:column filterBy="#{pr.definiton}" footerText="Açıklama">  
+                            <f:facet name="header">  
+                                <h:outputText value="Ürün Açıklaması"/>  
+                            </f:facet>  
+                            <p:cellEditor>  
+                                <f:facet name="output">  
+                                    <h:outputText value="#{pr.definiton}"/>  
+                                </f:facet>  
+                                <f:facet name="input">  
+                                    <p:inputText value="#{pr.definiton}" style="width:96%"/>  
+                                </f:facet>  
+                            </p:cellEditor>  
+
+                        </p:column>  
+
+                    </p:dataTable>
+
+                </h:form>
+            </p:panelGrid>
+
+
+        </ui:composition>
+    </h:body>
+</html>
+

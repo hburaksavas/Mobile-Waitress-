@@ -1,0 +1,51 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Facelet Title</title>
+    </h:head>
+    <h:body>
+        <ui:composition>
+
+            <h:form id="restaurantUpdateImageForm"  enctype="multipart/form-data">
+
+                <p:panelGrid columns="2">
+                    <f:facet name="header">
+                        Resim Ekle-Güncelle
+                    </f:facet>
+
+                    <h:graphicImage styleClass="image restaurantimg" 
+                                    id="pdimgg" 
+                                    value="data:image/png;base64,#{restaurantBean.restaurantImage64}"/>
+
+                    <p:panelGrid columns="2">
+
+                        <p:fileUpload 
+                            id="img" 
+                            fileLimit="1" fileLimitMessage="Maksimum 1 resim yüklenebilir" 
+                            fileUploadListener="#{restaurantBean.upload}" 
+                            label="Resim Seç"
+                            mode="advanced"
+                            auto="true"/>
+
+                        <h:commandButton value="Güncelle" styleClass="CommandButton">
+                            <f:ajax listener="#{restaurantBean.updateRestaurantImage}"
+                                    render=":growlform @form"
+                                    execute="@form"/>
+                        </h:commandButton>
+                    </p:panelGrid>
+
+                </p:panelGrid>
+
+
+
+            </h:form>
+
+        </ui:composition>
+    </h:body>
+</html>
+

@@ -1,0 +1,46 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Facelet Title</title>
+    </h:head>
+    <h:body>
+        <ui:composition>
+            <h:form>
+
+
+                <p:panelGrid columns="2">
+                    <f:facet name="header">
+                        Çalışan Sil
+                    </f:facet>
+
+                    <p:outputLabel for="deleteEmployeeList" value="Çalışan Tc Numara Listesi"/>
+                    <p:selectOneMenu id="deleteEmployeeList" value="#{employeeBean.empid}">
+                        <f:selectItem itemLabel="Tc Numarası Seç" itemValue="0"/>
+                        <f:selectItems value="#{employeeBean.employeeList}"
+                                       var="emp"
+                                       itemLabel="#{emp.tcNo}"
+                                       itemValue="#{emp.id}">
+                        </f:selectItems>
+
+                        <f:ajax 
+                            render=":growlform">
+                        </f:ajax>
+
+                    </p:selectOneMenu>
+
+                </p:panelGrid>
+
+                <h:commandButton styleClass="CommandButton" value="Sil">
+                    <f:ajax render=":growlform :updateEmployeeForm updateEmployeeList @form deleteEmployeeList"
+                            execute="@form" listener="#{employeeBean.deleteEmployee}"/>
+                </h:commandButton>
+            </h:form>
+        </ui:composition>
+    </h:body>
+</html>
+

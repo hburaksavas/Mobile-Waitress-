@@ -1,0 +1,35 @@
+.loginForm{
+    float:left;
+    width: 50%;
+    margin-top: 150px;
+    margin-left: 25%;
+    margin-right: 25%;
+    box-shadow: 1px 5px 10px 1px #59819f;
+}
+.login-panel{
+    float:left;
+    width: 100%;
+    margin-top: 10px;
+}
+.login-command{
+    float: right;
+    margin-right: 8%;
+    margin-top: 25px;
+    margin-bottom: 25px;
+}
+.ui-selectonemenu{
+    width: 90% !important;
+}
+.ui-selectonemenu-label{
+    width: 80% !important;
+}  
+.ui-inputfield{
+    width: 85%;
+} 
+.ui-panelgrid td, .ui-panelgrid tr
+{
+    border-style: none !important
+}
+.ui-panel-titlebar{
+    text-align: center;
+}

@@ -1,0 +1,91 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Mobil Garson Anasayfa</title>
+        <link href="restoran/styles/anasayfa.css" rel="stylesheet" type="text/css"/>
+        <link href="styles/anasayfa.css" rel="stylesheet" type="text/css"/>
+    </h:head>
+    <h:body>
+
+        <div class="navbar">
+            Mobil Garson Project
+        </div>
+
+        <div class="leftForm">
+
+            <div class="header-form">Restaurant Kayıt Formu</div>
+
+            <h:form enctype="multipart/form-data">
+                <div>
+
+                    <h:outputLabel styleClass="lbl" value="Restoran İsmi"></h:outputLabel>
+                    <h:inputText  styleClass="input-txt" value="#{restaurantRegisterBean.restaurantName}"></h:inputText>
+                    <h:outputLabel styleClass="lbl" value="Restoran Açıklama"></h:outputLabel>
+                    <h:inputTextarea  styleClass="input-txt" value="#{restaurantRegisterBean.definiton}"></h:inputTextarea>
+                    <h:outputLabel styleClass="lbl" value="Mail"></h:outputLabel>
+                    <h:inputText  styleClass="input-txt" value="#{restaurantRegisterBean.mail}"></h:inputText>
+                    <h:outputLabel styleClass="lbl" value="Şifre"></h:outputLabel>
+                    <h:inputSecret  styleClass="input-txt" value="#{restaurantRegisterBean.password}"></h:inputSecret>
+                    <h:outputLabel styleClass="lbl" value="Restoran Logosu"></h:outputLabel>
+                    <p:fileUpload mode="advanced"
+                                  fileUploadListener="#{restaurantRegisterBean.upload}"
+                                  auto="true"
+                                  styleClass="file-up" label="Resim Seç"/>
+
+                </div>
+
+                <h:commandButton value = "Kayıt Ol" styleClass="command-buton"
+                                 action="#{restaurantRegisterBean.register()}">
+                    <f:ajax execute="@form" render=":growl @form"/>
+                </h:commandButton>
+
+            </h:form>
+            <a href="http://localhost:8080/adminpage/" class="command-link">Zaten hesabınız var mı?</a>
+        </div>
+        <div class="rightForm">
+            <div class="header-form">Kullanıcı Kayıt Formu</div>
+            <h:form>
+                <div style="width: 100%;">
+                    <h:outputLabel styleClass="lbl" value="İsim"></h:outputLabel>
+                    <h:inputText  styleClass="input-txt" 
+                                  required="true"
+                                  requiredMessage="İsim alanı boş bırakılamaz"
+                                  value="#{userRegisterBean.name}"></h:inputText>
+                    <h:outputLabel styleClass="lbl" value="Soyisim"></h:outputLabel>
+                    <h:inputText  styleClass="input-txt" 
+                                  required="true"
+                                  requiredMessage="Soyisim alanı boş bırakılamaz"
+                                  value="#{userRegisterBean.surname}"></h:inputText>
+                    <h:outputLabel styleClass="lbl" value="Mail"></h:outputLabel>
+                    <h:inputText  styleClass="input-txt" 
+                                  required="true"
+                                  requiredMessage="Mail alanı boş bırakılamaz"
+                                  value="#{userRegisterBean.mail}"></h:inputText>
+                    <h:outputLabel styleClass="lbl" value="Şifre"></h:outputLabel>
+                    <h:inputSecret styleClass="input-txt" 
+                                   required="true"
+                                   requiredMessage="Şifre boş bırakılamaz"
+                                   value="#{userRegisterBean.password}"></h:inputSecret>
+                </div>
+                <h:commandButton value = "Kayıt Ol"
+                                 action="#{userRegisterBean.register()}"
+                                 styleClass="command-buton">
+                    <f:ajax execute="@form" render=":growl @form"/>
+                </h:commandButton>
+            </h:form>
+            
+        </div>
+
+        <div class="footer">
+             <a href="http://localhost:8080/adminpage/" class="linking"> Admin Paneli</a>
+             <a href="http://localhost:8080/mobilgarsonweb/faces/restoran/login.xhtml" class="linking" >Restoran Girişi</a>
+        </div>
+        <p:growl id="growl" life="1000" autoUpdate="true" />
+        
+    </h:body>
+</html>
+

@@ -1,0 +1,225 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Facelet Title</title>
+    </h:head>
+    <h:body>
+        <ui:composition>
+            <h:form id="zreportDataForm">
+                <p:dataTable id="zreportDataTable"
+                             var="zdt" 
+                             value="#{zreportBean.zreportList}"  
+                             paginator="true" 
+                             rows="10" 
+                             paginatorPosition="bottom"  
+                             editable="false" rendered="true">  
+
+                    <f:facet name="header">          Z Raporları        </f:facet>  
+
+                    <p:column filterBy="#{zdt.id}">  
+
+                        <f:facet name="header"> 
+                            <h:outputText value="Rapor No"/>  
+                        </f:facet>  
+
+                        <p:cellEditor>  
+
+                            <f:facet name="output">  
+                                <h:outputText value="#{zdt.id}"/>  
+                            </f:facet>  
+
+                            <f:facet name="input">  
+                                <p:inputText id="modelInput" value="#{zdt.id}" style="width:96%"/>  
+                            </f:facet>  
+
+                        </p:cellEditor>  
+
+                    </p:column>  
+
+                    <p:column filterBy="#{zdt.income}">  
+
+                        <f:facet name="header">  
+                            <h:outputText value="Toplam Gelir"/>  
+                        </f:facet>  
+
+                        <p:cellEditor>  
+
+                            <f:facet name="output">  
+                                <h:outputText value="#{zdt.income}">
+                                    <f:convertNumber minFractionDigits="3" currencyCode="tl" currencySymbol="tl"/>
+                                </h:outputText>  
+                            </f:facet>  
+
+                            <f:facet name="input">  
+                                <p:inputText value="#{zdt.income}" style="width:96%">
+
+                                </p:inputText>  
+                            </f:facet>  
+
+                        </p:cellEditor>  
+
+                    </p:column>  
+
+                    <p:column filterBy="#{zdt.date}">  
+
+                        <f:facet name="header">  
+                            <h:outputText value="Tarih"/>  
+                        </f:facet>  
+
+                        <p:cellEditor>  
+
+                            <f:facet name="output">  
+                                <h:outputText value="#{zdt.date}"/>  
+                            </f:facet>  
+
+                            <f:facet name="input">  
+                                <p:inputText value="#{zdt.date}" style="width:96%"/>  
+                            </f:facet>  
+
+                        </p:cellEditor>  
+
+                    </p:column>  
+                    <p:column filterBy="#{zdt.clock}">  
+
+                        <f:facet name="header">  
+                            <h:outputText value="Saat"/>  
+                        </f:facet>  
+
+                        <p:cellEditor>  
+
+                            <f:facet name="output">  
+                                <h:outputText value="#{zdt.clock}"/>  
+                            </f:facet>  
+
+                            <f:facet name="input">  
+                                <p:inputText value="#{zdt.clock}" style="width:96%"/>  
+                            </f:facet>  
+
+                        </p:cellEditor>  
+
+                    </p:column>  
+
+                    <p:column>
+
+                        <p:commandButton icon="ui-icon-search"
+                                         ajax="true"
+                                         update=":growlform 
+                                         :zreportDataForm:billDetail1 
+                                         :zreportDataForm:billDetail"
+                                         value="Rapor Detayları"
+                                         oncomplete="PF('dlg').show();"
+                                         actionListener="#{zreportBean.zreportDetails(zdt)}">
+                        </p:commandButton>
+
+                    </p:column>
+
+                </p:dataTable>
+
+                <p:dialog header="Rapor Detayları" widgetVar="dlg" modal="true"
+                          showEffect="fade" hideEffect="fade" resizable="false" 
+                          width="750px" maximizable="true" closeOnEscape="true"> 
+
+                    <p:scrollPanel mode="native" id="billDetail" style="width:100%;max-height: 720px">
+
+                        <f:facet name="header">
+                            Genel Bilgiler
+                        </f:facet>
+
+                        <p:outputPanel id="billDetail1" style="width:100%">
+
+                            <h:panelGrid columns="2" width="100%">
+
+                                <p:panelGrid columns="2" style="width: 100%">
+
+                                    <f:facet name="header">
+                                        Z Rapor No <br/> #{zreportBean.selectedZReport.id}
+                                    </f:facet>
+                                    <h:outputLabel value="Toplam Hesap Sayısı"/>
+                                    <h:outputLabel value="#{zreportBean.billCount}"/>
+
+                                    <h:outputLabel value="Toplam Sipariş Sayısı"/>
+                                    <h:outputLabel value="#{zreportBean.orderCount}"/>
+
+                                    <h:outputLabel value="Toplam Gelir"/>
+                                    <h:outputLabel value="#{zreportBean.selectedZReport.income}">
+                                        <f:convertNumber minFractionDigits="3"/>
+                                    </h:outputLabel>
+
+                                </p:panelGrid>
+
+                                <p:dataGrid paginator="true" rows="2" columns="2" emptyMessage="Sipariş kaydı bulunamadı."
+                                    value="#{zreportBean.ordersList}" var="o">
+                                    <f:facet name="header">
+                                        Siparişler
+                                    </f:facet>
+                                    <p:panelGrid columns="2" style="width:100%">
+                                        <f:facet name="header">
+                                            <p:outputLabel value="Sipariş No: #{o.id}"></p:outputLabel>
+                                        </f:facet>
+                                        <p:outputLabel value="Masa No"></p:outputLabel>
+                                        <p:outputLabel value="#{o.masaid}"></p:outputLabel>
+                                        <p:outputLabel value="Ürün no"></p:outputLabel>
+                                        <p:outputLabel value="#{o.urunid}"/>
+                                        <p:outputLabel value="Adet"></p:outputLabel>
+                                        <p:outputLabel value="#{o.piece}"></p:outputLabel>
+                                        <p:outputLabel value="Tarih"></p:outputLabel>
+                                        <p:outputLabel value="#{o.date} #{o.clock}"/>
+                                    </p:panelGrid>
+                                </p:dataGrid>
+
+                            </h:panelGrid>
+
+                        </p:outputPanel>
+
+                        <p:dataScroller value="#{zreportBean.billList}" var="bill" rows="5" chunkSize="5">
+
+                            <f:facet name="loader">
+                                <p:commandButton value="Daha Fazla Göster"/>
+                            </f:facet>
+                            <f:facet name="header">
+                                Rapor Detayları
+                            </f:facet>
+                            <h:panelGrid columns="3">
+
+                                <p:panelGrid columns="1" style="text-align: center;" >
+
+                                    Hesap No
+                                    <h:outputText value="#{bill.id}" style="font-weight: bold"></h:outputText>
+
+                                </p:panelGrid>
+
+                                <p:panelGrid columns="1">
+
+                                    Hesap Tutarı
+                                    <h:outputText value="#{bill.amount}" style="font-weight: bold">
+                                        <f:convertNumber minFractionDigits="3"/>
+                                    </h:outputText>
+
+                                </p:panelGrid>
+
+                                <p:panelGrid columns="2" style="width: 250px">
+                                    <h:outputText value="Tarih" style="font-size: 12px"></h:outputText>
+                                    <h:outputText value="#{bill.date}" style="font-size: 12px"></h:outputText>
+                                    <h:outputText value="Saat" style="font-size: 12px"></h:outputText>
+                                    <h:outputText value="#{bill.clock}" style="font-size: 12px"></h:outputText>
+                                </p:panelGrid>
+
+
+
+                            </h:panelGrid>
+
+                        </p:dataScroller>
+
+                    </p:scrollPanel>
+                </p:dialog>
+            </h:form>
+
+        </ui:composition>
+    </h:body>
+</html>
+

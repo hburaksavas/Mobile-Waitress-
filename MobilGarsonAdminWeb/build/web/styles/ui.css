@@ -1,0 +1,47 @@
+.CommandLink{
+    text-decoration: none;
+    font-size: 18px;
+    color: #515151;
+}
+.widthfull{
+    width: 100%;
+}
+.colorwhite{
+    color:#ffffff;
+}
+.CommandLink:hover{
+    color: #ffd133;
+}
+.CommandButton{
+    background-color: #464646;
+    color:white;
+    font-size: 16px;
+    font-weight: 600;
+    font-family: sans-serif , serif;
+    border:0;
+    min-width: 90px;
+    width: auto;
+    min-height: 32px;
+    margin-top: 5px;
+    border-radius: 6px;
+    box-shadow: 1px 4px 8px 1px #474747;
+    cursor: pointer;
+    padding: 10px;
+    margin-left:10px;
+    border:1px solid #707f89;
+}
+.CommandButton:hover{
+    color : #c9a249;
+    border-color: #c9a249;
+}
+.image{
+    max-height:150px;
+    max-width: 200px;
+}
+
+
+.ui-selectonemenu{
+    display: flex !important;
+    min-width: 250px;
+}
+

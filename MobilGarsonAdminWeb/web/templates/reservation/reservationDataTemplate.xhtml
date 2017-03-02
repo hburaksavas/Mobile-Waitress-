@@ -1,0 +1,171 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Facelet Title</title>
+    </h:head>
+    <h:body>
+        <ui:composition>
+            
+            <h:form id="reservationDataForm">
+                
+                <p:dataTable id="reservationDataTable"
+                             var="rdt" 
+                             value="#{reservationBean.reservationList}"  
+                             paginator="true" 
+                             rows="10" 
+                             paginatorPosition="bottom"  
+                             filteredValue="#{reservationBean.filteredReservationList}"  
+                             editable="false" rendered="true">  
+                    
+                    <f:facet name="header">          Rezervasyonlar        </f:facet>  
+                    
+                    <p:column filterBy="#{rdt.id}">  
+
+                        <f:facet name="header"> 
+                            <h:outputText value="Rezervasyon No"/>  
+                        </f:facet>  
+
+                        <p:cellEditor>  
+
+                            <f:facet name="output">  
+                                <h:outputText value="#{rdt.id}"/>  
+                            </f:facet>  
+
+                            <f:facet name="input">  
+                                <p:inputText id="modelInput" value="#{rdt.id}" style="width:96%"/>  
+                            </f:facet>  
+
+                        </p:cellEditor>  
+
+                    </p:column>  
+
+                    <p:column filterBy="#{rdt.username}">  
+
+                        <f:facet name="header">  
+                            <h:outputText value="İsim"/>  
+                        </f:facet>  
+
+                        <p:cellEditor>  
+
+                            <f:facet name="output">  
+                                <h:outputText value="#{rdt.username}"/>  
+                            </f:facet>  
+
+                            <f:facet name="input">  
+                                <p:inputText value="#{rdt.username}" style="width:96%"/>  
+                            </f:facet>  
+
+                        </p:cellEditor>  
+
+                    </p:column>  
+                    
+                    <p:column filterBy="#{rdt.usersurname}">  
+
+                        <f:facet name="header">  
+                            <h:outputText value="Soyisim"/>  
+                        </f:facet>  
+
+                        <p:cellEditor>  
+
+                            <f:facet name="output">  
+                                <h:outputText value="#{rdt.usersurname}"/>  
+                            </f:facet>  
+
+                            <f:facet name="input">  
+                                <p:inputText value="#{rdt.usersurname}" style="width:96%"/>  
+                            </f:facet>  
+
+                        </p:cellEditor>  
+
+                    </p:column>  
+
+                    <p:column filterBy="#{rdt.dinnertableid}">  
+
+                        <f:facet name="header">  
+                            <h:outputText value="Masa No"/>  
+                        </f:facet>  
+
+                        <p:cellEditor>  
+
+                            <f:facet name="output">  
+                                <h:outputText value="#{rdt.dinnertableid}"/>  
+                            </f:facet>  
+
+                            <f:facet name="input">  
+                                <p:inputText value="#{rdt.dinnertableid}" style="width:96%"/>  
+                            </f:facet>  
+
+                        </p:cellEditor>  
+
+                    </p:column>  
+
+                    <p:column filterBy="#{rdt.userid}">  
+
+                        <f:facet name="header">  
+                            <h:outputText value="User Id"/>  
+                        </f:facet>  
+
+                        <p:cellEditor>  
+
+                            <f:facet name="output">  
+                                <h:outputText value="#{rdt.userid}"/>  
+                            </f:facet>  
+
+                            <f:facet name="input">  
+                                <p:inputText value="#{rdt.userid}" style="width:96%"/>  
+                            </f:facet>  
+
+                        </p:cellEditor>  
+
+                    </p:column>  
+
+                    <p:column filterBy="#{rdt.date}">  
+                        
+                        <f:facet name="header">  
+                            <h:outputText value="Tarih"/>  
+                        </f:facet>  
+
+                        <p:cellEditor>  
+
+                            <f:facet name="output">  
+                                <h:outputText value="#{rdt.date}"/>  
+                            </f:facet>  
+
+                            <f:facet name="input">  
+                                <p:inputText value="#{rdt.date}" style="width:96%"/>  
+                            </f:facet>  
+
+                        </p:cellEditor>  
+
+                    </p:column>  
+
+                    <p:column filterBy="#{rdt.clock}">  
+
+                        <f:facet name="header">  
+                            <h:outputText value="Saat"/>  
+                        </f:facet>  
+
+                        <p:cellEditor>  
+
+                            <f:facet name="output">  
+                                <h:outputText value="#{rdt.clock}"/>  
+                            </f:facet>  
+
+                            <f:facet name="input">  
+                                <p:inputText value="#{rdt.clock}" style="width:96%"/>  
+                            </f:facet>  
+
+                        </p:cellEditor>  
+
+                    </p:column>  
+                </p:dataTable>
+            </h:form>
+        </ui:composition>
+    </h:body>
+</html>
+

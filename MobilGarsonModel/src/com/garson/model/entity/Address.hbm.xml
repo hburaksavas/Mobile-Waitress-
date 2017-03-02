@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Dec 7, 2016 1:03:25 AM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="com.garson.model.entity.Address" table="address" catalog="dodge" optimistic-lock="version">
+        <id name="id" type="java.lang.Long">
+            <column name="id" />
+            <generator class="identity" />
+        </id>
+        <property name="district" type="string">
+            <column name="district" length="445" />
+        </property>
+        <property name="city" type="string">
+            <column name="city" length="345" />
+        </property>
+        <property name="street" type="string">
+            <column name="street" length="345" />
+        </property>
+        <property name="adresstext" type="string">
+            <column name="adresstext" length="645" />
+        </property>
+    </class>
+</hibernate-mapping>

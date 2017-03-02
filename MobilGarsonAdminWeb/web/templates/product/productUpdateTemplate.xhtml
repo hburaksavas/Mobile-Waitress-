@@ -1,0 +1,117 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <title>Facelet Title</title>
+    </h:head>
+    <h:body>
+        <ui:composition>
+
+            <p:panelGrid columns="2" columnClasses="productUpdate,productUpdate">
+
+                <f:facet name="header">
+                    Ürün Güncelle
+                </f:facet>
+
+                <h:form id="updateProductForm">
+                    <p:outputLabel for="katlist" value="Kategoriler"></p:outputLabel>
+                    <p:selectOneMenu id="katlist" value="#{updateProductBean.categoryid}">
+                        <f:selectItem itemLabel="Kategori seçiniz" itemValue="0">
+                        </f:selectItem>
+
+                        <f:selectItems value="#{updateProductBean.categoryList}" var="c" 
+                                       itemLabel="#{c.name}" itemValue="#{c.id}">
+                        </f:selectItems>
+                        <f:ajax render=":updateProductFormList proddList"
+                                listener="#{updateProductBean.initProductList}"></f:ajax>
+                    </p:selectOneMenu>
+                </h:form>
+
+                <h:form id="updateProductFormList">
+                    <p:outputLabel for="proddList" value="Ürünler"></p:outputLabel>
+                    <p:selectOneMenu id="proddList" value="#{updateProductBean.productid}">
+                        <f:selectItem itemLabel="Ürün seçiniz" itemValue="0">
+                        </f:selectItem>
+                        <f:selectItems value="#{updateProductBean.productList}" var="p"
+                                       itemLabel="#{p.name}" itemValue="#{p.id}">
+                        </f:selectItems>
+                        <f:ajax render=":productDetails pdid pdname pdprice pdstock pddef pdimg1 pdimg2 pdimg3"
+                                listener="#{updateProductBean.initProductDetails}"></f:ajax>
+                    </p:selectOneMenu>
+                </h:form>
+
+            </p:panelGrid>
+
+            <h:form enctype="multipart/form-data" id="productDetails" style="margin-top: 5px; margin-left: 2px">
+
+                <p:panelGrid columns="2" columnClasses="productUpdate,productUpdate">
+
+                    <f:facet name="header">
+                        Ürün Detayları
+                    </f:facet>
+
+                    <p:outputLabel value="Ürün No"/>
+                    <p:outputLabel id="pdid" value="#{updateProductBean.productid}"/>
+
+                    <p:outputLabel value="Ürün Adı"/>
+                    <p:inputText id = "pdname" value="#{updateProductBean.name}"/>
+
+                    <p:outputLabel value="Ürün Fiyatı"/>
+                    <p:inputText id = "pdprice" value="#{updateProductBean.price}"/>
+
+                    <p:outputLabel value="Ürün Stok"/>
+                    <p:inputText id = "pdstock" value="#{updateProductBean.stock}"/>
+
+                    <p:outputLabel  value="Ürün Açıklaması"/>
+                    <p:inputTextarea id = "pddef" value="#{updateProductBean.definition}"/>
+
+                    <p:panelGrid columns="2">
+                        <p:outputLabel  value="Resim 1"/>
+                        <h:graphicImage styleClass="image" id="pdimg1" value="data:image/png;base64,#{updateProductBean.image1}"/>
+
+                        <p:outputLabel  value="Resim 2"/>
+                        <h:graphicImage  styleClass="image" id="pdimg2" value="data:image/png;base64,#{updateProductBean.image2}"/>
+
+                        <p:outputLabel  value="Resim 3"/>
+                        <h:graphicImage  styleClass="image" id="pdimg3" value="data:image/png;base64,#{updateProductBean.image3}"/>
+                    </p:panelGrid>
+                    <p:panelGrid columns="1">
+                        
+                        <p:fileUpload 
+                            id="img1" 
+                            fileUploadListener="#{updateProductBean.uploadFile1}" 
+                            label="Resim Seç"
+                            mode="advanced"
+                            auto="true"/>
+                        
+                        <p:fileUpload 
+                            id="img2" 
+                            fileUploadListener="#{updateProductBean.uploadFile2}" 
+                            label="Resim Seç"
+                            mode="advanced"
+                            auto="true"/>
+                        <p:fileUpload 
+                            id="img3" 
+                            fileUploadListener="#{updateProductBean.uploadFile3}" 
+                            label="Resim Seç"
+                            mode="advanced"
+                            auto="true"/>
+                    </p:panelGrid>
+
+                </p:panelGrid>
+
+                <h:commandButton class="CommandButton" value="Güncelle">
+                    <f:ajax execute="@form" render="@form :growlform :updateProductForm :updateProductFormList"
+                            listener="#{updateProductBean.updateProduct}"/>
+                </h:commandButton>
+
+            </h:form>
+
+        </ui:composition>
+    </h:body>
+</html>
+

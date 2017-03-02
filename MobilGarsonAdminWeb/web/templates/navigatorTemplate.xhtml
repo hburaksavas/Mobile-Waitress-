@@ -1,0 +1,318 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+    <h:head>
+        <title>Facelet Title</title>
+    </h:head>
+    <h:body>
+
+
+        <ui:composition>
+            <h:form>
+
+                <p:megaMenu class="panelmenu">
+
+                    <p:submenu label="Restaurant İşlemleri">
+                        <p:column>
+                            <p:submenu>
+                                <p:menuitem>
+                                    <h:commandLink class="CommandLink" value="Bilgileriniz" 
+                                                   onclick="showform('restaurantInfoDiv')">
+                                        <f:ajax listener="#{restaurantBean.initRestaurantInfos}"
+                                                render=":restaurantInfoForm"></f:ajax>
+                                    </h:commandLink>
+                                </p:menuitem>
+
+                                <p:menuitem>
+                                    <h:commandLink class="CommandLink" value="Bilgilerinizi Güncelleyin" 
+                                                   onclick="showform('restaurantUpdateInfoDiv')">    
+                                        <f:ajax listener="#{restaurantBean.clearFields}"
+                                                render=":restaurantUpdateForm"></f:ajax>
+                                    </h:commandLink>
+                                </p:menuitem>
+
+                                <p:menuitem>
+                                    <h:commandLink class="CommandLink" value="Resim Değiştir/Yükle" 
+                                                   onclick="showform('restaurantUpdateImageDiv')">    
+                                        <f:ajax 
+                                            listener="#{restaurantBean.initRestaurantInfos}"
+                                            render=":restaurantUpdateImageForm">
+                                        </f:ajax>
+                                    </h:commandLink>
+                                </p:menuitem>
+
+                                <p:menuitem>
+                                    <h:commandLink class="CommandLink" value="Yorumlar" 
+                                                   onclick="showform('restaurantCommentDiv')">    
+                                        <f:ajax 
+                                            listener="#{restaurantBean.initRestaurantComments}"
+                                            render=":restaurantCommentForm">
+                                        </f:ajax>
+
+                                    </h:commandLink>
+                                </p:menuitem>
+                                <p:menuitem>
+                                    <h:commandLink class="CommandLink" value="Şikayetler" 
+                                                   onclick="showform('restaurantComplaintDiv')">    
+                                        <f:ajax 
+                                            listener="#{complaintBean.initComplaints}"
+                                            render=":restaurantComplaintForm">
+                                        </f:ajax>
+                                    </h:commandLink>
+                                </p:menuitem>
+                            </p:submenu>
+                        </p:column>
+                    </p:submenu>
+
+                    <p:submenu label="Kategori İşlemleri">
+
+                        <p:column>
+                            <p:submenu>
+                                <p:menuitem value="" icon="ui-icon-disk" >
+                                    <h:commandLink class="CommandLink" 
+                                                   value="Kategoriler" 
+                                                   onclick="showform('categoryData')">
+                                        <f:ajax render=":categorydataform cellEditingTable" 
+                                                listener="#{messageTableController.initTables}">
+                                        </f:ajax>
+
+                                    </h:commandLink>
+                                </p:menuitem>
+
+                                <p:menuitem>
+                                    <h:commandLink class="CommandLink" 
+                                                   value="Kategori Ekle" 
+                                                   onclick="showform('addCategory')">    
+                                        <f:ajax render="categoryname"></f:ajax>
+                                    </h:commandLink>
+                                </p:menuitem>
+
+                                <p:menuitem>
+
+                                    <h:commandLink class="CommandLink" 
+                                                   value="Kategori Güncelle" 
+                                                   onclick="showform('updateCategory')">   
+
+                                        <f:ajax render=":updateCat cateList" 
+                                                listener="#{categoryBean.action}"></f:ajax>
+
+                                    </h:commandLink>
+
+                                </p:menuitem>
+
+                                <p:menuitem>
+                                    <h:commandLink class="CommandLink" 
+                                                   value="Kategori Sil" 
+                                                   onclick="showform('deleteCategory')">    
+
+                                        <f:ajax render="catid"></f:ajax>
+
+                                    </h:commandLink>
+                                </p:menuitem>
+                            </p:submenu>
+                        </p:column>
+                    </p:submenu>
+
+                    <p:submenu label="Ürün İşlemleri">
+
+                        <p:column>
+                            <p:submenu>
+                                <p:menuitem>
+                                    <h:commandLink class="CommandLink" 
+                                                   value="Ürünler" 
+                                                   onclick="showform('productData')" >
+
+                                        <f:ajax render=":productform :productdataform"
+                                                listener="#{productBean.pullCategoryAjaxListener}">
+                                        </f:ajax>
+
+                                    </h:commandLink>
+
+                                </p:menuitem>
+
+                                <p:menuitem>
+
+                                    <h:commandLink class="CommandLink" 
+                                                   value="Ürün Ekle" 
+                                                   onclick="showform('addProduct')">    
+                                        <f:ajax render=":addProductForm" 
+                                                listener="#{addProductBean.initList}"></f:ajax>
+
+                                    </h:commandLink>
+
+                                </p:menuitem>
+
+                                <p:menuitem>
+                                    <h:commandLink class="CommandLink" 
+                                                   value="Ürün Güncelle" 
+                                                   onclick="showform('updateProd')">   
+
+                                        <f:ajax render=":updateProductForm katlist" 
+                                                listener="#{updateProductBean.initCategoryList}"></f:ajax>
+
+                                    </h:commandLink>
+                                </p:menuitem>
+
+                                <p:menuitem>
+                                    <h:commandLink class="CommandLink" 
+                                                   value="Ürün Sil" 
+                                                   onclick="showform('deleteProduct')">   
+
+                                        <f:ajax render=":deleteProductForm categoryList" 
+                                                listener="#{productBean.pullCategoryAjaxListener}"></f:ajax>
+
+                                    </h:commandLink>
+
+                                </p:menuitem>
+                            </p:submenu>
+                        </p:column>
+                    </p:submenu>
+
+                    <p:submenu label="Masa İşlemleri">
+                        <p:column>
+                            <p:submenu>
+                                <p:menuitem>
+                                    <h:commandLink class="CommandLink" value="Masalar" 
+                                                   onclick="showform('tableDataDiv')">
+                                        <f:ajax render=":tableDataForm tableDataTables" listener="#{tableBean.initTableList}"></f:ajax>
+                                    </h:commandLink>
+                                </p:menuitem>
+
+                                <p:menuitem>
+                                    <h:commandLink class="CommandLink" value="Masa Ekle" onclick="showform('addTable')">    
+                                        <f:ajax render=":addTableForm"></f:ajax>
+                                    </h:commandLink>
+                                </p:menuitem>
+
+                                <p:menuitem>
+                                    <h:commandLink class="CommandLink" value="Masa Güncelle" onclick="showform('updateDinnerTable')">    
+                                        <f:ajax render=":updateTableForm tableList" listener="#{tableBean.initTableList}"></f:ajax>
+                                    </h:commandLink>
+                                </p:menuitem>
+
+                                <p:menuitem>
+                                    <h:commandLink class="CommandLink" value="Masa Sil" onclick="showform('deleteTable')">    
+                                        <f:ajax render="tableidd"></f:ajax>
+                                    </h:commandLink>
+                                </p:menuitem>
+
+                            </p:submenu>
+                        </p:column>
+                    </p:submenu>
+
+                    <p:submenu label="Çalışan İşlemleri">
+                        <p:column>
+                            <p:submenu>
+                                <p:menuitem>
+                                    <h:commandLink class="CommandLink" 
+                                                   value="Çalışanlar" 
+                                                   onclick="showform('employeeDataDiv')"> 
+                                        <f:ajax render=":employeeDataForm employeeDataTable"
+                                                listener="#{employeeBean.initEmployeeList}">
+                                        </f:ajax>
+                                    </h:commandLink>
+                                </p:menuitem>
+
+                                <p:menuitem>
+                                    <h:commandLink class="CommandLink" 
+                                                   value="Yeni Çalışan" onclick="showform('addEmployee')">    
+                                        <f:ajax render=":addEmployeeForm"></f:ajax>
+                                    </h:commandLink>
+                                </p:menuitem>
+
+                                <p:menuitem>
+                                    <h:commandLink class="CommandLink"
+                                                   value="Çalışan Bilgilerini Güncelle" 
+                                                   onclick="showform('updateEmployeeDiv')">    
+                                        <f:ajax render=":updateEmployeeForm updateEmployeeList" 
+                                                listener="#{employeeBean.initEmployeeList}"></f:ajax>
+                                    </h:commandLink>
+                                </p:menuitem>
+
+                                <p:menuitem>
+                                    <h:commandLink class="CommandLink" value="Çalışan Sil" 
+                                                   onclick="showform('deleteEmployeeDiv')">    
+                                        <f:ajax render=":deleteEmployeeForm deleteEmployeeList"
+                                                listener="#{employeeBean.initEmployeeList}"></f:ajax>
+                                    </h:commandLink>
+                                </p:menuitem>
+                            </p:submenu>
+                        </p:column>
+                    </p:submenu>
+
+                    <p:submenu label="Rezervasyon İşlemleri">
+                        <p:column>
+                            <p:submenu>
+                                <p:menuitem>
+                                    <h:commandLink class="CommandLink" 
+                                                   value="Rezervasyonlar" 
+                                                   onclick="showform('reservationData')" >
+                                        <f:ajax render=":reservationDataForm reservationDataTable"
+                                                listener="#{reservationBean.initReservationList}">
+                                        </f:ajax>
+                                    </h:commandLink>
+                                </p:menuitem>
+
+                                <p:menuitem>
+                                    <h:commandLink class="CommandLink" value="Rezervasyon Ekle"
+                                                   onclick="showform('addReservationDiv')">    
+                                        <f:ajax render=":addReservation resTablelist"
+                                                listener="#{reservationBean.initTableList}"></f:ajax>
+                                    </h:commandLink>
+                                </p:menuitem>
+
+                                <p:menuitem>
+                                    <h:commandLink class="CommandLink" value="Rezervasyon Güncelle" 
+                                                   onclick="showform('updateReservationDiv')">  
+                                        <f:ajax render=":updateReservationForm reservNo"
+                                                />
+                                    </h:commandLink>
+                                </p:menuitem>
+
+                                <p:menuitem>
+                                    <h:commandLink class="CommandLink" 
+                                                   value="Rezervasyon İptali" 
+                                                   onclick="showform('cancelReservationDiv')"> 
+                                        <f:ajax render=":cancelReservationForm reservNo"
+                                                />
+                                    </h:commandLink>
+
+                                </p:menuitem>
+                            </p:submenu>
+                        </p:column>
+                    </p:submenu>
+
+                    <p:submenu label="Rapor - Gün Sonu">
+                        <p:column>
+                            <p:submenu>
+                                <p:menuitem>
+                                    <h:commandLink class="CommandLink" value="Z Raporları" 
+                                                   onclick="showform('zreportDataDiv')">
+                                        <f:ajax render=":zreportDataForm"
+                                                listener="#{zreportBean.initReportList}"></f:ajax>
+                                    </h:commandLink>
+                                </p:menuitem>
+
+                                <p:menuitem>
+                                    <h:commandLink class="CommandLink" value="Gün Sonu Yap" 
+                                                   onclick="showform('zreportCreateDiv')">    
+                                        <f:ajax render=":growlform :zreportForm"
+                                                listener="#{zreportBean.zreportCreate}"></f:ajax>
+                                    </h:commandLink>
+                                </p:menuitem>
+                            </p:submenu>
+                        </p:column>
+                    </p:submenu>
+
+                </p:megaMenu>
+                
+            </h:form>
+        </ui:composition>
+
+    </h:body>
+</html>
+

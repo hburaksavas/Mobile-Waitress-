@@ -1,0 +1,166 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Facelet Title</title>
+    </h:head>
+    <h:body>
+        <ui:composition>
+            <h:form id="formTables">
+                <c:forEach items="#{homeBean.dinnerTableData}" var="dinnerTable">
+                    <div class="table-buton" id="T#{dinnerTable.id}">
+                        <c:choose>
+                            <c:when test="#{dinnerTable.statu eq 0}">
+
+                                <h:commandLink id="T-#{dinnerTable.id}"
+                                               value="#{dinnerTable.name}"
+                                               styleClass="table-buton-name" 
+                                               title="Masa Aç/Kapa #{dinnerTable.name}"
+                                               action="#{homeBean.changeTableStatu(dinnerTable.id)}">
+                                    <f:ajax render=":growlform @this"></f:ajax>
+                                </h:commandLink>
+
+                                <div class="table-buton-right">
+                                    <!-- Bill Button-->
+                                    <p:commandLink oncomplete="PF('dlg').show();"
+                                                   update=":tableOrdersForm @this"
+                                                   action="#{homeBean.initListOrderByTableId(dinnerTable.id)}">
+
+                                        <h:graphicImage  id="bill-#{dinnerTable.id}" 
+                                                         styleClass="buton-img" 
+                                                         value="resource/images/bill.png">
+                                        </h:graphicImage>
+
+                                    </p:commandLink>
+                                    <!--Garson Button-->
+                                    <p:commandLink
+                                        update="@this"
+                                        action="#{homeBean.deleteRequest(dinnerTable.id)}"
+                                        >
+
+                                        <h:graphicImage id="waitress-#{dinnerTable.id}" 
+                                                        styleClass="buton-img" 
+                                                        value="resource/images/waitress.png"
+                                                        />
+
+                                    </p:commandLink>
+                                </div>
+                            </c:when>
+                            <c:otherwise> <!-- Açık Butonlar İçin CSS-->
+                                <h:commandLink id="T-#{dinnerTable.id}"
+                                               value="#{dinnerTable.name}"
+                                               styleClass="table-buton-name-opened" 
+                                               title="Masa Aç/Kapa #{dinnerTable.name}"
+                                               action="#{homeBean.changeTableStatu(dinnerTable.id)}">
+                                    <f:ajax render=":growlform @this"></f:ajax>
+                                </h:commandLink>
+
+                                <div class="table-buton-right">
+                                    <!-- Bill Button-->
+                                    <p:commandLink oncomplete="PF('dlg').show();"
+                                                   update=":tableOrdersForm @this"
+                                                   action="#{homeBean.initListOrderByTableId(dinnerTable.id)}">
+
+                                        <h:graphicImage id="bill-#{dinnerTable.id}" 
+                                                        styleClass="buton-img" 
+                                                        value="resource/images/bill.png">
+                                        </h:graphicImage>
+
+                                    </p:commandLink>
+                                    <!--Garson Button-->
+                                    <p:commandLink
+                                         update="@this"
+                                        action="#{homeBean.deleteRequest(dinnerTable.id)}"
+                                        >
+                                        <h:graphicImage id="waitress-#{dinnerTable.id}" 
+                                                        styleClass="buton-img" 
+                                                        value="resource/images/waitress.png"/>
+                                    </p:commandLink>
+                                </div>
+                            </c:otherwise>
+
+                        </c:choose>
+
+                    </div>
+
+                </c:forEach>
+
+
+            </h:form>
+
+            <h:form id="tableOrdersForm">
+                <p:dialog
+                    header="Hesap" widgetVar="dlg" modal="true"
+                    showEffect="fade" hideEffect="fade" resizable="false" maximizable="true">
+                    <div style="width: 100%; height: 550px">
+                        <p:dataTable id="billDataTable"
+                                     value="#{homeBean.tablesOrderItemList}" 
+                                     editable="false"
+                                     var="ox" emptyMessage="Daha Fazla Sipariş Bulunmamaktadır">
+                            <p:column>
+                                <f:facet name="header">Sipariş No</f:facet>
+                                <h:outputLabel value="#{ox.orderNo}"/>
+                            </p:column>
+                            <p:column>
+                                <f:facet name="header">Ürün</f:facet>
+                                <h:outputLabel value="#{ox.productName}"/> 
+                            </p:column>
+                            <p:column>
+                                <f:facet name="header">Adet</f:facet>
+                                <p:spinner value="#{ox.orderCount}" 
+                                           rendered="#{ox.statu == 'Ödendi'}"
+                                           disabled="true"
+                                           size="2"/>
+                                <p:spinner value="#{ox.orderCount}" 
+                                           rendered="#{ox.statu != 'Ödendi'}"
+                                           size="2"/>
+                            </p:column>
+                            <p:column>
+                                <f:facet name="header">Durum</f:facet>
+                                <h:outputLabel value="#{ox.statu}"/>
+                            </p:column>
+                            <p:column>
+                                <f:facet name="header">Saat</f:facet>
+                                <h:outputLabel value="#{ox.clock}"/>
+                            </p:column>   
+
+                            <p:column>
+                                <p:commandButton 
+                                    rendered="#{ox.statu == 'Ödendi'}"  
+                                    value="Öde" 
+                                    disabled="true"
+                                    action="#{homeBean.payOneByOne(ox.orderNo,ox.tableNo,ox.orderCount)}"
+                                    update=":tableOrdersForm:billDataTable"/>
+                                <p:commandButton 
+                                    rendered="#{ox.statu != 'Ödendi'}"  
+                                    value="Öde" 
+                                    action="#{homeBean.payOneByOne(ox.orderNo,ox.tableNo,ox.orderCount)}"
+                                    update=":tableOrdersForm:billDataTable"/>
+                            </p:column>
+                        </p:dataTable>
+                        <p:panelGrid columns="3">
+                            <p:commandButton value="Hesabı Kapat"
+                                             action="#{homeBean.closeBill()}"
+                                             update=":tableOrdersForm:billDataTable totalbill"
+                                             title="Bütün hesabı kapatır"/>
+                            <h:outputLabel value="Toplam Hesap Tutarı"/>
+                            <h:outputLabel id="totalbill" value="#{homeBean.bill.amount} ₺">
+                                <f:convertNumber minFractionDigits="2"/>
+                            </h:outputLabel>
+                        </p:panelGrid>
+
+                    </div>
+                </p:dialog>
+
+            </h:form>
+
+
+        </ui:composition>
+    </h:body>
+</html>
+

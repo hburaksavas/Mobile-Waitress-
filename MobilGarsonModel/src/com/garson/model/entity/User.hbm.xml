@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Dec 7, 2016 1:03:25 AM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="com.garson.model.entity.User" table="user" catalog="dodge" optimistic-lock="version">
+        <id name="id" type="java.lang.Long">
+            <column name="id" />
+            <generator class="identity" />
+        </id>
+        <property name="addresid" type="java.lang.Long">
+            <column name="addresid" />
+        </property>
+        <property name="name" type="string">
+            <column name="name" length="345" />
+        </property>
+        <property name="surname" type="string">
+            <column name="surname" length="245" />
+        </property>
+        <property name="mail" type="string">
+            <column name="mail" length="445" unique="true" />
+        </property>
+        <property name="password" type="string">
+            <column name="password" length="11" />
+        </property>
+        <property name="phone" type="string">
+            <column name="phone" length="15" />
+        </property>
+        <property name="gender" type="java.lang.Integer">
+            <column name="gender" />
+        </property>
+    </class>
+</hibernate-mapping>

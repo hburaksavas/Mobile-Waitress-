@@ -1,0 +1,25 @@
+.order-item{
+    width: 100%;
+    margin-bottom: 5px;
+    border-bottom: 1px solid #b24a04;
+}
+.ready-buton{
+    float:right;
+    margin-top: 5px;
+    margin-bottom: 15px;
+}
+.header{
+    position: fixed;
+    width: 25%;
+    text-align: center;
+    font-size : 22px;
+    color:white;
+    background-color: #e59d43;
+    box-shadow: inset 2px 0px 10px 2px #4b4b4b;
+    line-height: 2em;
+    z-index: 1;
+}
+.widget-contents{
+    margin-top: 50px;
+    margin-bottom: 50px;
+}

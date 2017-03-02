@@ -1,0 +1,93 @@
+body{
+    margin: 0;
+    padding: 0;
+    background-color: #6b92c7;
+}
+.navbar{
+    float: left;
+    width: 100%;
+    background-color: #474747;
+}
+.navbar-left{
+    float:left;
+    width: 50%;
+}
+.navbar-right{
+    float:left;
+    width: 50%;
+}
+
+.sitename{
+    float: left;
+    color: #d2dbe1;
+    font-size: 30px;
+    margin-top: 20px;
+    margin-left: 10px;
+}
+.logout-panel{
+    float:right;
+    width: 25%;
+    margin-top: 10px;
+}
+.adminicon{
+    float:right;
+    width: 46px;
+    height:60px;
+    margin-top: 10px;
+}
+.adminMail{
+    float: left;
+    width: 100%;
+    font-size: 18px;
+    margin-top: 5px;
+    color: #d2dbe1;
+}
+.ui-clock{
+    position: fixed;
+    top:95%;
+    left:80%;
+}
+.ui-panelgrid{
+    box-shadow: 1px 5px 10px 1px black;
+}
+.logout{
+    float:left;
+    width: 100%;
+    margin-top: 5px;
+    font-size: 18px;
+    text-decoration: none;
+}
+.logout:hover{
+    color: #d2dbe1;
+}
+
+.icon{
+    float:left;
+    width: 96px;
+    height:72px;
+    margin-left: 30px;
+}
+
+.contextMenu{
+    float:left;
+    width: 100%;
+}
+.panelmenu{
+    float:left;
+    width: 99%;
+}
+.submenu{
+    height: 35px;
+}
+.dataTables{
+    float: left;
+    margin-left:10px;
+    margin-right: 10px;
+    margin-top:5px;
+}
+.generalForm{
+    float:left; 
+    margin-left: 20%;
+    margin-top: 20px;
+    width: 79%;
+}

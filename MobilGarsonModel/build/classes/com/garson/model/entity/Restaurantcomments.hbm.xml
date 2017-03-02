@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Dec 7, 2016 1:03:25 AM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+  <class catalog="dodge" name="com.garson.model.entity.RestaurantComments" optimistic-lock="version" table="restaurantcomments">
+    <id name="id" type="java.lang.Long">
+      <column name="id"/>
+      <generator class="identity"/>
+    </id>
+    <property name="date" type="string">
+      <column length="50" name="date" not-null="true"/>
+    </property>
+    <property name="clock" type="string">
+      <column length="5" name="clock" not-null="true"/>
+    </property>
+    <property name="userid" type="long">
+      <column name="userid" not-null="true"/>
+    </property>
+    <property name="restaurantid" type="long">
+      <column name="restaurantid" not-null="true"/>
+    </property>
+    <property name="comment" type="string">
+      <column length="240" name="comment" not-null="true"/>
+    </property>
+  </class>
+</hibernate-mapping>

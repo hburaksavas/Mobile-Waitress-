@@ -1,0 +1,70 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+         <title>Admin Login</title>
+         <link href="styles/loginstyle.css" rel="stylesheet" type="text/css"/>
+    </h:head>
+    <h:body>
+        <div class="loginForm">
+            <f:view>
+
+                <h:form>
+                    <div class="logpanel">
+
+                        <h:graphicImage styleClass="login-image" value="resource/images/lock.png"/>
+                        <p:outputLabel styleClass="login-header" value="MobilGarson Admin Girişi"/>
+
+                    </div>
+
+                    <p:separator styleClass="separator"/>
+
+                    <h:panelGrid styleClass="loggrid" id="loggrid" columns="2" cellspacing="10px"
+                                 columnClasses="forty-percent,rightcolumn">
+                        <p:outputLabel for="list" value="Restaurant"/>
+
+                        <p:selectOneMenu styleClass="plus" id="list" value="#{adminLogin.restaurantid}">
+                            <f:selectItems value="#{adminLogin.restItems}" />
+                        </p:selectOneMenu>
+
+
+                        <p:outputLabel for="mail" value="Mail"/>
+                        <p:inputText styleClass="width350" id="mail" value="#{adminLogin.mail}" 
+                                     requiredMessage="Please enter your email address."
+                                     validatorMessage="Invalid email format" 
+                                     required="true"
+                                     placeholder="Enter email address">
+                            <f:validateLength minimum="3" />
+                        </p:inputText>
+                        <p:outputLabel for="password" value="Şifre"/>
+                        <p:password styleClass="width350" 
+                                    id="password" 
+                                    value="#{adminLogin.password}" 
+                                    requiredMessage="Please enter your password."
+                                    required="true">
+                        </p:password>
+
+                    </h:panelGrid>
+
+                    <p:commandButton class="commandBtn"
+                                     value="Giriş Yap" icon="ui-icon-check" 
+                                     action="#{adminLogin.validateLogin}"
+                                     update=":growlform">
+                    </p:commandButton>     
+
+                </h:form>
+
+                <h:form id="growlform">
+                    <p:growl id="growl" showDetail="true" life="2500" />  
+                </h:form> 
+
+            </f:view>
+        </div>
+
+
+    </h:body>
+</html>
+

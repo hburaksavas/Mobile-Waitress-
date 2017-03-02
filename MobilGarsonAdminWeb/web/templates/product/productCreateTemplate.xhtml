@@ -1,0 +1,70 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <title>Facelet Title</title>
+    </h:head>
+    <h:body>
+        <ui:composition>
+                <h:form id="addProductForm" enctype="multipart/form-data">
+                <h:panelGroup>
+                    <p:panelGrid columns="2">
+
+                        <f:facet name="header">
+                            <h:outputText value="Ürün Ekle"/>
+                        </f:facet>
+
+                        <p:outputLabel value="Kategori Seç"/>
+                        <p:selectOneMenu id="list" value="#{addProductBean.categoryid}">
+                            <f:selectItems value="#{addProductBean.list}" var="l" itemLabel="#{l.name}" itemValue="#{l.id}"/>
+                        </p:selectOneMenu>
+
+                        <p:outputLabel for="proname" value="Ürün İsmi">
+                        </p:outputLabel>
+                        <p:inputText  id="proname" value="#{addProductBean.name}"></p:inputText>
+
+                        <p:outputLabel for="fiyat" value="Fiyat">
+                        </p:outputLabel>
+                        <p:inputText id="fiyat" value="#{addProductBean.price}"></p:inputText>
+
+                        <p:outputLabel for="stok" value="Stok">
+                        </p:outputLabel>
+                        <p:inputText id="stok" value="#{addProductBean.stock}"></p:inputText>
+
+                        <p:outputLabel for="def" value="Açıklama">
+                        </p:outputLabel>
+                        <p:inputText id="def" value="#{addProductBean.definition}"></p:inputText>
+
+                        <p:outputLabel for="img" value="Resim Ekle"></p:outputLabel>
+                        <p:fileUpload 
+                            id="img" 
+                            fileLimit="3" fileLimitMessage="Maksimum 3 resim yüklenebilir" 
+                            fileUploadListener="#{addProductBean.upload}" 
+                            mode="advanced"
+                            allowTypes="/(\.|\/)(jpe?g|png)$/"/>
+                    </p:panelGrid>
+
+
+                    <h:panelGrid>
+
+                        <h:commandButton styleClass="CommandButton" value="Ekle" >
+
+                            <f:ajax execute="@form" 
+                                    render=":growlform @form list proname fiyat stok def" 
+                                    listener="#{addProductBean.save}">
+                            </f:ajax>
+
+                        </h:commandButton>
+
+                    </h:panelGrid>
+
+                </h:panelGroup>
+            </h:form>
+        </ui:composition>
+    </h:body>
+</html>
+
